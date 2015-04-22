@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Three框架</title>
+		<script src="three.js"></script>
+		<script src="TrackballControls.js"></script>
+		<style type="text/css">
+			div#canvas-frame {
+				border: none;
+				cursor: pointer;
+				width: 100%;
+				height: 600px;
+				background-color: #EEEEEE;
+			}
+
+		</style>
+		<script>
+            var renderer;
+            function initThree() {
+                width = document.getElementById('canvas-frame').clientWidth;
+                height = document.getElementById('canvas-frame').clientHeight;
+                renderer = new THREE.WebGLRenderer({
+                    antialias : true
+                });
+                renderer.setSize(width, height);
+                document.getElementById('canvas-frame').appendChild(renderer.domElement);
+                renderer.setClearColorHex(0xAAAAAA, 1.0);
+            }
+
+            var camera;
+            function initCamera() {
+                camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+                camera.position.x = 0;
+                camera.position.y = 1000;
+                camera.position.z = 0;
+                camera.up.x = 0;
+                camera.up.y = 0;
+                camera.up.z = 1;
+                camera.lookAt({
+                    x : 0,
+                    y : 0,
+                    z : 0
+                });
+            }
+
+            var scene;
+            function initScene() {
+                scene = new THREE.Scene();
+            }
+
+            var light;
+            function initLight() {
+                light = new THREE.DirectionalLight(0xFF0000, 1.0, 0);
+                light.position.set(100, 100, 200);
+                scene.add(light);
+            }
+
+            var cube;
+            function initObject() {
+
+				var geometry = new THREE.SphereGeometry( 130, 50, 50);
+				var mesh2 = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial( { color: 0xA1634E} ) );
+				
+				mesh2.scale.x = 0.75;
+				scene.add( mesh2 );
+            }
+			
+			var controls;
+			function setControl()
+			{
+				controls = new THREE.TrackballControls( camera );
+
+				/*
+				controls.rotateSpeed = 5.0;
+				controls.zoomSpeed = 5;
+				controls.panSpeed = 2;
+
+				controls.noZoom = false;
+				controls.noPan = false;
+
+				controls.staticMoving = false;
+				controls.dynamicDampingFactor = 0.3;*/
+			}
+			
+
+            function threeStart() {
+                initThree();
+                initCamera();
+                initScene();
+                initLight();
+                initObject();
+				setControl();
+				animate();
+
+            }
+
+			function animate(){
+				controls.update();
+				renderer.clear();
+                renderer.render(scene, camera);
+				requestAnimationFrame(animate);
+			}
+			
+		</script>
+	</head>
+
+	<body onload="threeStart();">
+		<div id="canvas-frame"></div>
+	</body>
+</html>

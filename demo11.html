@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo11</title>
+</head>
+<body onload="init()">
+	<canvas id="mainCanvas" width="400px" heigth="300px"></canvas>
+	<script type="text/javascript" src="three.js"></script>
+	<script type="text/javascript" src="helvetiker_regular.typeface.js"></script>
+	<script type="text/javascript">
+	function init(){
+		//渲染器和canvas元素进行绑定
+		//HTML里定义了canvas元素时
+		var renderer = new THREE.WebGLRenderer({
+			canvas : document.getElementById('mainCanvas')
+		});
+		//没有定义canvas元素
+		// var renderer = new THREE.WebGLRenderer();
+		// renderer.setSize(400,300);
+		// document.getElementsByTagName('body')[0].appendChild(renderer.domElement);
+		renderer.setClearColor(0x000000);
+
+		//物体都是添加到场景中 最开始进行实例化，然后将物体添加到场景中即可
+		var scene = new THREE.Scene();
+
+		//正交投影照相机
+		var camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+        camera.position.set(25, 25, 25);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        scene.add(camera);
+		scene.add(camera);
+		//透视投影照相机
+		// var camera = new THREE.PerspectiveCamera(70, 4/3, 1, 10);
+		// camera.position.set(0,0,5);
+		// scene.add(camera);
+
+		var cube = new THREE.Mesh(new THREE.CubeGeometry(1, 2, 3, 1, 1, 1),new THREE.MeshLambertMaterial({color: 0xffff00,emissive: 0xff0000,opacity:0.75}));
+		// var cube = new THREE.Mesh(new THREE.PlaneGeometry(2, 4),new THREE.MeshBasicMaterial({color: 0xff0000,wireframe: true}));
+		// var cube = new THREE.Mesh(new THREE.SphereGeometry(1, 8, 6, Math.PI/2, Math.PI/6, Math.PI/3),new THREE.MeshBasicMaterial({color: 0xff0000,wireframe: true}));
+		// var cube = new THREE.Mesh(new THREE.CircleGeometry(2, 18, Math.PI/3, Math.PI/3*4), new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+		// var cube = new THREE.Mesh(new THREE.CylinderGeometry(2, 3, 4, 18, 3, true), new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+		// var cube = new THREE.Mesh(new THREE.TetrahedronGeometry(3), new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+		// var cube = new THREE.Mesh(new THREE.OctahedronGeometry(3), new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+		// var cube = new THREE.Mesh(new THREE.IcosahedronGeometry(3), new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+		// var cube = new THREE.Mesh(new THREE.TorusGeometry(3, 1, 4, 8), new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+		// var cube = new THREE.Mesh(new THREE.TorusGeometry(3, 1, 4, 8, Math.PI / 3 * 2), new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+		// var cube = new THREE.Mesh(new THREE.TorusKnotGeometry(2, 0.5, 32, 8), new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+		// var cube = new THREE.Mesh(new THREE.TextGeometry('Hello', {size: 1, height: 1}), new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+		// var geometry = new THREE.Geometry();
+		// geometry.vertices.push(new THREE.Vector3(-1, 2, -1));
+		// geometry.vertices.push(new THREE.Vector3(1, 2, -1));
+		// geometry.vertices.push(new THREE.Vector3(1, 2, 1));
+		// geometry.vertices.push(new THREE.Vector3(-1, 2, 1));
+		// // 底部4顶点
+		// geometry.vertices.push(new THREE.Vector3(-2, 0, -2));
+		// geometry.vertices.push(new THREE.Vector3(2, 0, -2));
+		// geometry.vertices.push(new THREE.Vector3(2, 0, 2));
+		// geometry.vertices.push(new THREE.Vector3(-2, 0, 2));
+
+		// // 设置顶点连接情况
+		// // 顶面
+		// geometry.faces.push(new THREE.Face3(0, 1, 2, 3));
+		// // 底面
+		// geometry.faces.push(new THREE.Face3(4, 5, 6, 7));
+		// // 四个侧面
+		// geometry.faces.push(new THREE.Face3(0, 1, 5, 4));
+		// geometry.faces.push(new THREE.Face3(1, 2, 6, 5));
+		// geometry.faces.push(new THREE.Face3(2, 3, 7, 6));
+		// geometry.faces.push(new THREE.Face3(3, 0, 4, 7));
+		// var cube = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+		scene.add(cube);
+		renderer.render(scene, camera);
+	}
+	</script>
+</body>
+</html>
